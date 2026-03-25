@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoundersSuite — Demo Kit & Sales Playbook</title>
+<style>
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page-break { page-break-before: always; }
+    .no-print { display: none; }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a2e; background: #fff; line-height: 1.6; padding: 40px; max-width: 900px; margin: 0 auto; }
+
+  .header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; margin-bottom: 40px; }
+  .header h1 { font-size: 32px; margin-bottom: 8px; }
+  .header p { font-size: 16px; opacity: 0.9; }
+  .header .date { font-size: 13px; opacity: 0.7; margin-top: 12px; }
+  .header .confidential { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 16px; border-radius: 20px; font-size: 12px; margin-top: 8px; letter-spacing: 1px; text-transform: uppercase; }
+
+  h2 { font-size: 22px; color: #667eea; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #667eea; }
+  h3 { font-size: 18px; color: #1a1a2e; margin: 24px 0 12px; }
+
+  .demo-card { background: #f8f9ff; border: 1px solid #e0e4f5; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .demo-card .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .demo-card .emoji { font-size: 28px; }
+  .demo-card .card-title { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+  .demo-card .card-subtitle { font-size: 13px; color: #666; }
+  .demo-card .vendor-tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag-single { background: #e8f5e9; color: #2e7d32; }
+  .tag-multi { background: #fff3e0; color: #e65100; }
+  .tag-both { background: #e3f2fd; color: #1565c0; }
+
+  .link-section { margin: 8px 0; }
+  .link-section .label { font-size: 13px; font-weight: 600; color: #555; min-width: 120px; display: inline-block; }
+  .link-section a { color: #667eea; text-decoration: none; word-break: break-all; font-size: 13px; }
+  .link-section a:hover { text-decoration: underline; }
+
+  .creds-box { background: #fff; border: 1px dashed #667eea; border-radius: 8px; padding: 12px 16px; margin-top: 12px; }
+  .creds-box .creds-title { font-size: 12px; font-weight: 700; color: #667eea; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .creds-box code { background: #f0f0f5; padding: 2px 8px; border-radius: 4px; font-size: 14px; font-weight: 600; }
+
+  .flow-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .flow-table th { background: #667eea; color: white; padding: 10px 14px; text-align: left; font-size: 13px; }
+  .flow-table td { padding: 10px 14px; border-bottom: 1px solid #e0e4f5; }
+  .flow-table tr:nth-child(even) { background: #f8f9ff; }
+  .flow-table tr:hover { background: #eef0ff; }
+
+  .step-list { counter-reset: step; list-style: none; padding: 0; }
+  .step-list li { counter-increment: step; padding: 12px 16px 12px 60px; position: relative; margin-bottom: 8px; background: #f8f9ff; border-radius: 8px; border-left: 3px solid #667eea; }
+  .step-list li::before { content: counter(step); position: absolute; left: 16px; top: 10px; background: #667eea; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+
+  .warning-box { background: #fff8e1; border: 1px solid #ffcc02; border-radius: 8px; padding: 16px; margin: 16px 0; }
+  .warning-box .warning-title { font-weight: 700; color: #e65100; margin-bottom: 4px; }
+
+  .script-box { background: #f0faf0; border: 1px solid #a5d6a7; border-radius: 8px; padding: 16px; margin: 12px 0; }
+  .script-box .script-label { font-size: 12px; font-weight: 700; color: #2e7d32; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .script-box p { font-size: 14px; color: #333; font-style: italic; }
+
+  .pricing-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .pricing-table th { background: #764ba2; color: white; padding: 10px 14px; text-align: left; }
+  .pricing-table td { padding: 10px 14px; border-bottom: 1px solid #e0e4f5; }
+  .pricing-table tr:nth-child(even) { background: #faf8ff; }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 8px 0 8px 28px; position: relative; font-size: 14px; }
+  .checklist li::before { content: "☐"; position: absolute; left: 0; font-size: 16px; }
+
+  .footer { text-align: center; margin-top: 40px; padding: 20px; color: #999; font-size: 12px; border-top: 1px solid #eee; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>FoundersSuite — Demo Kit</h1>
+  <p>Sales Playbook & Demo Reference Guide</p>
+  <div class="date">Last Updated: 26 March 2026</div>
+  <div class="confidential">Internal Use Only</div>
+</div>
+
+<!-- ==================== SECTION 1: ALL DEMOS ==================== -->
+<h2>1. Complete Demo Arsenal</h2>
+<p style="margin-bottom:20px; color:#555;">All admin panels use the same credentials unless noted. Each demo resets every 1 hour automatically.</p>
+
+<div class="creds-box" style="margin-bottom:24px;">
+  <div class="creds-title">Universal Admin Credentials</div>
+  <div>Email: <code>admin@admin.com</code> &nbsp;&nbsp; Password: <code>12345678</code></div>
+  <div style="font-size:12px; color:#888; margin-top:4px;">Works for: Drivemond, StackFood, GroFresh, Hexacom, 6Valley. All have auto-fill buttons on login page.</div>
+</div>
+
+<!-- TAXI -->
+<div class="demo-card">
+  <div class="card-header">
+    <span class="emoji">🚗</span>
+    <div>
+      <div class="card-title">Taxi / Ride-Hailing</div>
+      <div class="card-subtitle">Drivemond by Codemond — Covers: Uber, Ola, Rapido clones</div>
+    </div>
+    <span class="vendor-tag tag-both">Single & Multi</span>
+  </div>
+  <div class="link-section"><span class="label">User App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Drivemond/V2.8/Drivemond%20V2.8.apk">Download Drivemond V2.8</a></div>
+  <div class="link-section"><span class="label">Driver App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Drivemond/V2.8/Drivemond%20Driver%20V2.8.apk">Download Drivemond Driver V2.8</a></div>
+  <div class="link-section"><span class="label">Admin Panel:</span> <a href="https://drivemond-admin.codemond.com/admin">https://drivemond-admin.codemond.com/admin</a></div>
+  <div class="creds-box">
+    <div class="creds-title">Login</div>
+    Email: <code>admin@admin.com</code> &nbsp; Password: <code>12345678</code>
+  </div>
+</div>
+
+<!-- FOOD DELIVERY -->
+<div class="demo-card">
+  <div class="card-header">
+    <span class="emoji">🍕</span>
+    <div>
+      <div class="card-title">Food Delivery</div>
+      <div class="card-subtitle">StackFood by 6amTech — Covers: Zomato, Swiggy clones</div>
+    </div>
+    <span class="vendor-tag tag-both">Single & Multi</span>
+  </div>
+  <div class="link-section"><span class="label">User App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/StackFood/V8.8/StackFood%20V8.8.apk">Download StackFood V8.8</a></div>
+  <div class="link-section"><span class="label">Delivery App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/StackFood/V8.8/StackFood%20Delivery%20Man%20V8.8.apk">Download Delivery Man V8.8</a></div>
+  <div class="link-section"><span class="label">Restaurant App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/StackFood/V8.8/StackFood%20Restaurant%20V8.8.apk">Download Restaurant V8.8</a></div>
+  <div class="link-section"><span class="label">Admin Panel:</span> <a href="https://stackfood-admin.6amtech.com/login/admin">https://stackfood-admin.6amtech.com/login/admin</a></div>
+  <div class="link-section"><span class="label">Restaurant Panel:</span> <a href="https://stackfood-admin.6amtech.com/login/restaurant">https://stackfood-admin.6amtech.com/login/restaurant</a></div>
+  <div class="creds-box">
+    <div class="creds-title">Login</div>
+    Admin: <code>admin@admin.com</code> / <code>12345678</code><br>
+    Restaurant: <code>test.restaurant@gmail.com</code> / <code>12345678</code>
+  </div>
+</div>
+
+<!-- GROCERY SINGLE -->
+<div class="demo-card">
+  <div class="card-header">
+    <span class="emoji">🛒</span>
+    <div>
+      <div class="card-title">Grocery — Single Vendor</div>
+      <div class="card-subtitle">GroFresh by 6amTech — Covers: Blinkit, Zepto, BigBasket (own store)</div>
+    </div>
+    <span class="vendor-tag tag-single">Single Vendor</span>
+  </div>
+  <div class="link-section"><span class="label">User App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/GroFresh/V8.0/GroFresh%20V8.0.apk">Download GroFresh V8.0</a></div>
+  <div class="link-section"><span class="label">Delivery App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/GroFresh/V8.0/GroFresh%20Delivery%20Man%20V8.0.apk">Download Delivery Man V8.0</a></div>
+  <div class="link-section"><span class="label">Web App:</span> <a href="https://grofresh-web.6amtech.com/">https://grofresh-web.6amtech.com/</a></div>
+  <div class="link-section"><span class="label">Admin Panel:</span> <a href="https://grofresh-admin.6amtech.com/admin/auth/login">https://grofresh-admin.6amtech.com/admin/auth/login</a></div>
+  <div class="link-section"><span class="label">Branch Panel:</span> <a href="https://grofresh-admin.6amtech.com/branch/auth/login">https://grofresh-admin.6amtech.com/branch/auth/login</a></div>
+  <div class="creds-box">
+    <div class="creds-title">Login</div>
+    Email: <code>admin@admin.com</code> &nbsp; Password: <code>12345678</code>
+  </div>
+</div>
+
+<!-- GROCERY MULTI -->
+<div class="demo-card">
+  <div class="card-header">
+    <span class="emoji">🏪</span>
+    <div>
+      <div class="card-title">Grocery — Multi Vendor Marketplace</div>
+      <div class="card-subtitle">eGrocer by WRTeam — Covers: multi-store grocery marketplace</div>
+    </div>
+    <span class="vendor-tag tag-multi">Multi Vendor</span>
+  </div>
+  <div class="link-section"><span class="label">User App:</span> <a href="https://play.google.com/store/apps/details?id=com.wrteam.egrocer">Google Play Store</a></div>
+  <div class="link-section"><span class="label">Partner App:</span> <a href="https://play.google.com/store/apps/details?id=com.wrteam.egrocer.seller">Google Play Store (Seller & Delivery)</a></div>
+  <div class="link-section"><span class="label">Web App:</span> <a href="https://egrocerweb.wrteam.me/">https://egrocerweb.wrteam.me/</a></div>
+  <div class="link-section"><span class="label">Admin Panel:</span> <a href="https://egrocer.wrteam.me/login">https://egrocer.wrteam.me/login</a></div>
+  <div class="link-section"><span class="label">Seller Panel:</span> <a href="https://egrocer.wrteam.me/seller/login">https://egrocer.wrteam.me/seller/login</a></div>
+  <div class="link-section"><span class="label">Delivery Panel:</span> <a href="https://egrocer.wrteam.me/delivery_boy/login">https://egrocer.wrteam.me/delivery_boy/login</a></div>
+  <div class="creds-box">
+    <div class="creds-title">Login</div>
+    Check auto-fill on login page. Likely: <code>admin@admin.com</code> / <code>12345678</code>
+  </div>
+</div>
+
+<!-- QUICK COMMERCE -->
+<div class="demo-card">
+  <div class="card-header">
+    <span class="emoji">⚡</span>
+    <div>
+      <div class="card-title">Quick Commerce</div>
+      <div class="card-subtitle">Hexacom by 6amTech — Covers: Blinkit, Zepto style (single brand, fast delivery)</div>
+    </div>
+    <span class="vendor-tag tag-single">Single Vendor</span>
+  </div>
+  <div class="link-section"><span class="label">User App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Hexacom/V8.0/Hexacom%20V8.0.apk">Download Hexacom V8.0</a></div>
+  <div class="link-section"><span class="label">Delivery App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Hexacom/V8.0/Hexacom%20Delivery%20Man%20V8.0.apk">Download Delivery Man V8.0</a></div>
+  <div class="link-section"><span class="label">Admin Panel:</span> <a href="https://hexacom-admin.6amtech.com/admin/auth/login">https://hexacom-admin.6amtech.com/admin/auth/login</a></div>
+  <div class="creds-box">
+    <div class="creds-title">Login</div>
+    Email: <code>admin@admin.com</code> &nbsp; Password: <code>12345678</code>
+  </div>
+</div>
+
+<!-- ECOMMERCE -->
+<div class="demo-card">
+  <div class="card-header">
+    <span class="emoji">🛍️</span>
+    <div>
+      <div class="card-title">E-Commerce Marketplace</div>
+      <div class="card-subtitle">6Valley by 6amTech — Covers: Amazon, Flipkart, Meesho clones</div>
+    </div>
+    <span class="vendor-tag tag-multi">Multi Vendor</span>
+  </div>
+  <div class="link-section"><span class="label">User App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/6Valley/16.1/6Valley%20V16.1.apk">Download 6Valley V16.1</a></div>
+  <div class="link-section"><span class="label">Delivery App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/6Valley/16.1/6Valley%20Delivery%20Man%20V4.9.apk">Download Delivery Man V4.9</a></div>
+  <div class="link-section"><span class="label">Vendor App (APK):</span> <a href="https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/6Valley/16.1/6Valley%20Vendor%20V16.1.apk">Download Vendor V16.1</a></div>
+  <div class="link-section"><span class="label">Admin Panel:</span> <a href="https://6valley.6amtech.com/login/admin">https://6valley.6amtech.com/login/admin</a></div>
+  <div class="link-section"><span class="label">Vendor Panel:</span> <a href="https://6valley.6amtech.com/vendor/auth/login">https://6valley.6amtech.com/vendor/auth/login</a></div>
+  <div class="creds-box">
+    <div class="creds-title">Login</div>
+    Email: <code>admin@admin.com</code> / <code>12345678</code> (auto-fill available)
+  </div>
+</div>
+
+<!-- ==================== SECTION 2: DECISION MATRIX ==================== -->
+<div class="page-break"></div>
+<h2>2. Lead → Demo Decision Matrix</h2>
+<p style="margin-bottom:16px; color:#555;">When a lead tells you what they want, use this table to instantly pick the right demo.</p>
+
+<table class="flow-table">
+  <thead>
+    <tr>
+      <th>Lead Says</th>
+      <th>Ask This</th>
+      <th>"My Own Business"</th>
+      <th>"Marketplace"</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Taxi / Ola / Uber / Rapido</strong></td>
+      <td>"Your own fleet or marketplace?"</td>
+      <td>Drivemond</td>
+      <td>Drivemond</td>
+    </tr>
+    <tr>
+      <td><strong>Food / Zomato / Swiggy</strong></td>
+      <td>"Your restaurant or multi-restaurant?"</td>
+      <td>StackFood</td>
+      <td>StackFood</td>
+    </tr>
+    <tr>
+      <td><strong>Grocery / Blinkit / Zepto</strong></td>
+      <td>"Your own store or marketplace?"</td>
+      <td>GroFresh</td>
+      <td>eGrocer</td>
+    </tr>
+    <tr>
+      <td><strong>Quick Commerce</strong></td>
+      <td>"Your brand or marketplace?"</td>
+      <td>Hexacom</td>
+      <td>eGrocer</td>
+    </tr>
+    <tr>
+      <td><strong>E-commerce / Amazon / Flipkart</strong></td>
+      <td>"Your products or marketplace?"</td>
+      <td>Hexacom</td>
+      <td>6Valley</td>
+    </tr>
+    <tr>
+      <td><strong>Meesho / Reseller</strong></td>
+      <td>"Your products or marketplace?"</td>
+      <td>Hexacom</td>
+      <td>6Valley</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ==================== SECTION 3: TESTING WORKFLOW ==================== -->
+<div class="page-break"></div>
+<h2>3. Demo Testing Workflow (Step-by-Step)</h2>
+<p style="margin-bottom:16px; color:#555;">Follow this for EVERY demo before showing it to a client. Make sure you've tested it yourself first.</p>
+
+<h3>A. Taxi App (Drivemond)</h3>
+<ol class="step-list">
+  <li><strong>User App:</strong> Open → Sign Up with random demo details → Allow location → Try booking a ride</li>
+  <li><strong>Driver App:</strong> Open → Sign Up → Fill demo details → Upload any image → OTP: <code>000000</code> (if fails, hit Resend → enter <code>000000</code> again) → Add vehicle details</li>
+  <li><strong>Admin Panel:</strong> Login → Go to <strong>Vehicle List</strong> → Approve the driver's vehicle</li>
+  <li><strong>Full Test:</strong> Keep both apps open side-by-side → Book ride from User App → Accept from Driver App</li>
+</ol>
+
+<h3>B. Food Delivery (StackFood)</h3>
+<ol class="step-list">
+  <li><strong>User App:</strong> Open → Sign Up → Allow location → Browse restaurants → Place an order</li>
+  <li><strong>Restaurant App:</strong> Open → Login → Accept/prepare the order</li>
+  <li><strong>Delivery App:</strong> Open → Sign Up → Accept delivery request</li>
+  <li><strong>Admin Panel:</strong> Login → Check orders dashboard, restaurant management</li>
+</ol>
+
+<h3>C. Grocery (GroFresh / eGrocer / Hexacom)</h3>
+<ol class="step-list">
+  <li><strong>User App:</strong> Open → Sign Up → Browse products → Add to cart → Place order</li>
+  <li><strong>Delivery App:</strong> Open → Sign Up → Accept delivery</li>
+  <li><strong>Admin Panel:</strong> Login → Check products, orders, delivery management</li>
+  <li><strong>For eGrocer Multi-Vendor:</strong> Also check Seller Panel — show vendor onboarding flow</li>
+</ol>
+
+<h3>D. E-Commerce (6Valley)</h3>
+<ol class="step-list">
+  <li><strong>User App:</strong> Open → Sign Up → Browse products → Add to cart → Checkout</li>
+  <li><strong>Vendor App:</strong> Open → Login → Show product listing, order management</li>
+  <li><strong>Delivery App:</strong> Open → Sign Up → Accept delivery</li>
+  <li><strong>Admin Panel:</strong> Login → Show vendor management, product approvals, commission settings</li>
+</ol>
+
+<div class="warning-box">
+  <div class="warning-title">Important Notes</div>
+  <ul style="margin-left:16px; font-size:14px;">
+    <li>All demos auto-reset every 1 hour — your test data will be wiped</li>
+    <li>APK files need "Install from Unknown Sources" enabled on Android</li>
+    <li>OTP for all apps: try <code>000000</code> or check auto-fill</li>
+    <li>If admin panel doesn't load, clear browser cache and try again</li>
+    <li>Test on a real Android phone, NOT emulator — clients will test on phone</li>
+  </ul>
+</div>
+
+<!-- ==================== SECTION 4: COPY-PASTE WHATSAPP MESSAGES ==================== -->
+<div class="page-break"></div>
+<h2>4. Copy-Paste WhatsApp Messages</h2>
+<p style="margin-bottom:8px; color:#555;">Pick the right message based on what the lead wants. Click the box to select all text → Copy → Paste in WhatsApp.</p>
+<p style="margin-bottom:20px; color:#e65100; font-weight:600; font-size:13px;">Replace [Calendly Link] with your actual Calendly URL before sending.</p>
+
+<style>
+  .wa-msg { background: #e7ffdb; border: 1px solid #b5dfaa; border-radius: 12px; padding: 20px; margin-bottom: 24px; font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.7; white-space: pre-wrap; cursor: pointer; position: relative; }
+  .wa-msg:hover { background: #dcf8c6; }
+  .wa-msg::after { content: "Click to select → Copy"; position: absolute; top: 8px; right: 12px; font-size: 10px; color: #888; font-style: italic; }
+  .wa-msg .wa-header { font-weight: 700; font-size: 16px; color: #1a1a2e; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .wa-label { display: inline-block; background: #667eea; color: white; padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; }
+  .wa-sublabel { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+  .wa-sublabel.multi { background: #fff3e0; color: #e65100; }
+</style>
+
+<!-- ========== FIRST REPLY (UNIVERSAL) ========== -->
+<div class="wa-label">FIRST REPLY — Send to EVERY lead</div>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey! Thanks for reaching out to FoundersSuite 🙌
+
+Would love to hear about your app idea — let's do a quick chat: [Calendly Link]</div>
+
+<!-- ========== TAXI ========== -->
+<div class="wa-label">🚗 TAXI / RIDE-HAILING</div>
+<span class="wa-sublabel">Works for: Uber, Ola, Rapido, cab, auto, bike taxi</span>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Here's a demo for you to try 👇
+
+📱 *User App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Drivemond/V2.8/Drivemond%20V2.8.apk
+
+🚗 *Driver App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Drivemond/V2.8/Drivemond%20Driver%20V2.8.apk
+
+💻 *Admin Panel:*
+https://drivemond-admin.codemond.com/admin
+Login: admin@admin.com / 12345678
+
+*How to test:*
+1. Install both APKs on your phone
+2. Sign up on both apps with demo details
+3. On Driver App — add vehicle details, OTP: 000000
+4. On Admin Panel — go to Vehicle List → Approve the vehicle
+5. Book a ride from User App → Accept from Driver App
+
+Want me to walk you through it? Pick a slot: [Calendly Link]</div>
+
+<!-- ========== FOOD DELIVERY ========== -->
+<div class="wa-label">🍕 FOOD DELIVERY</div>
+<span class="wa-sublabel">Works for: Zomato, Swiggy, cloud kitchen, restaurant app</span>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Here's a demo for you to try 👇
+
+📱 *Customer App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/StackFood/V8.8/StackFood%20V8.8.apk
+
+🍳 *Restaurant App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/StackFood/V8.8/StackFood%20Restaurant%20V8.8.apk
+
+🛵 *Delivery App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/StackFood/V8.8/StackFood%20Delivery%20Man%20V8.8.apk
+
+💻 *Admin Panel:*
+https://stackfood-admin.6amtech.com/login/admin
+Login: admin@admin.com / 12345678
+
+*How to test:*
+1. Install apps and sign up with demo details
+2. Place an order from Customer App
+3. Accept & prepare order from Restaurant App
+4. Accept delivery from Delivery App
+5. Track the full flow on Admin Panel
+
+Want me to walk you through it? Pick a slot: [Calendly Link]</div>
+
+<!-- ========== GROCERY SINGLE VENDOR ========== -->
+<div class="wa-label">🛒 GROCERY — SINGLE VENDOR</div>
+<span class="wa-sublabel">Works for: own store delivery, Blinkit-style (single brand), local grocery</span>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Here's a demo for you to try 👇
+
+📱 *Customer App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/GroFresh/V8.0/GroFresh%20V8.0.apk
+
+🛵 *Delivery App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/GroFresh/V8.0/GroFresh%20Delivery%20Man%20V8.0.apk
+
+🌐 *Web App:*
+https://grofresh-web.6amtech.com/
+
+💻 *Admin Panel:*
+https://grofresh-admin.6amtech.com/admin/auth/login
+Login: admin@admin.com / 12345678
+
+*How to test:*
+1. Install Customer App → sign up → browse products → place order
+2. Install Delivery App → sign up → accept delivery
+3. Check Admin Panel → orders, products, delivery management
+
+Want me to walk you through it? Pick a slot: [Calendly Link]</div>
+
+<!-- ========== GROCERY MULTI VENDOR ========== -->
+<div class="wa-label">🏪 GROCERY — MULTI VENDOR MARKETPLACE</div>
+<span class="wa-sublabel multi">Works for: multi-store grocery marketplace, multiple vendors on one platform</span>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Here's a demo for you to try 👇
+
+📱 *Customer App:*
+https://play.google.com/store/apps/details?id=com.wrteam.egrocer
+
+🏪 *Seller & Delivery App:*
+https://play.google.com/store/apps/details?id=com.wrteam.egrocer.seller
+
+🌐 *Web App:*
+https://egrocerweb.wrteam.me/
+
+💻 *Admin Panel:*
+https://egrocer.wrteam.me/login
+
+👨‍💼 *Seller Panel:*
+https://egrocer.wrteam.me/seller/login
+
+🛵 *Delivery Panel:*
+https://egrocer.wrteam.me/delivery_boy/login
+
+*How to test:*
+1. Install Customer App from Play Store → browse stores → place order
+2. Check Seller Panel → see how vendors manage their products
+3. Check Delivery Panel → see delivery assignment flow
+4. Check Admin Panel → vendor management, commissions, orders
+
+Want me to walk you through it? Pick a slot: [Calendly Link]</div>
+
+<!-- ========== QUICK COMMERCE ========== -->
+<div class="wa-label">⚡ QUICK COMMERCE</div>
+<span class="wa-sublabel">Works for: Blinkit, Zepto, 10-min delivery, single brand fast delivery</span>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Here's a demo for you to try 👇
+
+📱 *Customer App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Hexacom/V8.0/Hexacom%20V8.0.apk
+
+🛵 *Delivery App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/Hexacom/V8.0/Hexacom%20Delivery%20Man%20V8.0.apk
+
+💻 *Admin Panel:*
+https://hexacom-admin.6amtech.com/admin/auth/login
+Login: admin@admin.com / 12345678
+
+*How to test:*
+1. Install Customer App → sign up → browse products → place order
+2. Install Delivery App → sign up → accept delivery
+3. Check Admin Panel → products, orders, delivery tracking
+
+Want me to walk you through it? Pick a slot: [Calendly Link]</div>
+
+<!-- ========== E-COMMERCE MULTI VENDOR ========== -->
+<div class="wa-label">🛍️ E-COMMERCE MARKETPLACE</div>
+<span class="wa-sublabel multi">Works for: Amazon, Flipkart, Meesho, multi-vendor product marketplace</span>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Here's a demo for you to try 👇
+
+📱 *Customer App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/6Valley/16.1/6Valley%20V16.1.apk
+
+👨‍💼 *Vendor App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/6Valley/16.1/6Valley%20Vendor%20V16.1.apk
+
+🛵 *Delivery App:*
+https://6am-storage.sgp1.digitaloceanspaces.com/Demo-APK/6Valley/16.1/6Valley%20Delivery%20Man%20V4.9.apk
+
+💻 *Admin Panel:*
+https://6valley.6amtech.com/login/admin
+Login: admin@admin.com / 12345678
+
+*How to test:*
+1. Install Customer App → sign up → browse products → add to cart → checkout
+2. Install Vendor App → see product listing & order management
+3. Install Delivery App → accept delivery requests
+4. Check Admin Panel → vendor management, product approvals, commissions
+
+Want me to walk you through it? Pick a slot: [Calendly Link]</div>
+
+<!-- ========== FOLLOW-UP NUDGE ========== -->
+<div class="wa-label">🔄 FOLLOW-UP — If lead goes silent (send after 24hrs)</div>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey! Just following up — are you still looking to build this? Happy to do a quick 10-min call to walk you through exactly what you'd get.
+
+[Calendly Link]</div>
+
+<!-- ========== STEP-BY-STEP INSTRUCTIONS (to send along with any demo) ========== -->
+<div class="wa-label">📋 TESTING INSTRUCTIONS — Send after demo links if client asks "how to test"</div>
+
+<div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Here's the step-by-step to test the full flow:
+
+*User/Customer App*
+1. Open the app → Sign Up with any demo details
+2. Allow location access
+3. Browse and place an order / book a ride
+
+*Driver/Delivery/Vendor App*
+1. Open the app → Sign Up with demo details
+2. Upload any random image for verification
+3. OTP: enter 000000 (if first try fails, hit Resend → 000000 again)
+4. Once in dashboard, complete your profile
+
+*Admin Panel*
+1. Login with the credentials shared
+2. Approve any pending drivers/vendors
+3. Explore orders, users, and settings
+
+*Full Test*
+Keep both apps open side by side — place an order/book from one app, accept from the other. You'll see the complete flow.
+
+Or if you'd prefer, we can walk through it together on a quick call: [Calendly Link]</div>
+
+<!-- ==================== SECTION 5: SALES FLOW ==================== -->
+<div class="page-break"></div>
+<h2>5. Sales Flow — Lead to Close</h2>
+
+<h3>Step 1: Lead Messages (Any Channel)</h3>
+<div class="script-box">
+  <div class="script-label">Send This (Universal Template)</div>
+  <p>"Hey! Thanks for reaching out to FoundersSuite. Would love to hear about your app idea — let's do a quick chat: [Calendly Link]"</p>
+</div>
+
+<h3>Step 2: On The Call (First 10 Minutes — YOU ASK)</h3>
+<ol class="step-list">
+  <li>"So tell me — what's the app you're thinking of?"</li>
+  <li>"Is this for your own business or are you building a marketplace?"</li>
+  <li>"Who's your target user?"</li>
+  <li>"How are you solving this problem today without the app?"</li>
+  <li>"Have you seen any app that's close to what you want?"</li>
+</ol>
+
+<h3>Step 3: Show Demo (Next 5 Minutes)</h3>
+<div class="script-box">
+  <div class="script-label">Say This</div>
+  <p>"Let me show you something — this is similar to what we'd build for you."</p>
+</div>
+<p style="font-size:14px; color:#555; margin-top:8px;">→ Use the Decision Matrix (Section 2) to pick the right demo<br>→ Screen-share the admin panel + walk through the app<br>→ Narrate: "For your use case, we'd customize X, Y, Z"</p>
+
+<h3>Step 4: Close (Last 5 Minutes)</h3>
+<div class="script-box">
+  <div class="script-label">Say This</div>
+  <p>"Here's what I suggest — we start with an MVP in Phase 1. Your core flow working end-to-end. You launch, validate, and then we add more features in Phase 2."</p>
+</div>
+
+<!-- ==================== SECTION 6: PRICING ==================== -->
+<div class="page-break"></div>
+<h2>6. Pricing Guide</h2>
+
+<table class="pricing-table">
+  <thead>
+    <tr>
+      <th>Phase</th>
+      <th>What's Included</th>
+      <th>Price</th>
+      <th>Timeline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>V1 — MVP</strong></td>
+      <td>Core flow: User App + Driver/Vendor App + Basic Admin Panel. One city/region. One vehicle/vendor type.</td>
+      <td><strong>₹50,000</strong></td>
+      <td>14-20 days</td>
+    </tr>
+    <tr>
+      <td><strong>V2 — Scale</strong></td>
+      <td>Multi-vehicle/vendor, wallet, surge pricing, ratings, push notifications</td>
+      <td><strong>₹40,000 - ₹60,000</strong></td>
+      <td>3-4 weeks</td>
+    </tr>
+    <tr>
+      <td><strong>V3 — Expand</strong></td>
+      <td>Multi-city/Pan India, multi-language, advanced analytics, referral system</td>
+      <td><strong>₹50,000 - ₹80,000</strong></td>
+      <td>4-6 weeks</td>
+    </tr>
+    <tr>
+      <td><strong>V4 — Retainer</strong></td>
+      <td>Maintenance, new features, server management, bug fixes</td>
+      <td><strong>₹30,000 - ₹50,000/mo</strong></td>
+      <td>Ongoing</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="warning-box">
+  <div class="warning-title">Pricing Strategy</div>
+  <ul style="margin-left:16px; font-size:14px;">
+    <li><strong>₹50K is the door opener</strong> — never negotiate below this</li>
+    <li><strong>Multi-vendor leads = higher LTV</strong> — they always need V2, V3</li>
+    <li><strong>Total lifetime value per client: ₹2-3L+</strong></li>
+    <li>If client asks for discount on V1: "We can do ₹50K for V1, and I'll give you priority scheduling for V2"</li>
+    <li><strong>Never quote all phases upfront</strong> — only V1 price on the first call</li>
+  </ul>
+</div>
+
+<!-- ==================== SECTION 7: PRE-CALL CHECKLIST ==================== -->
+<h2>7. Pre-Call Checklist</h2>
+<ul class="checklist">
+  <li>Identified lead's category (taxi/food/grocery/ecommerce)</li>
+  <li>Identified single vendor vs multi-vendor</li>
+  <li>Correct demo APKs downloaded & tested on your phone</li>
+  <li>Admin panel link ready to screen-share</li>
+  <li>Admin credentials verified (auto-fill working)</li>
+  <li>Calendly link ready to share for follow-up</li>
+  <li>Pricing clear in your head (V1 = ₹50K, don't quote V2/V3 yet)</li>
+  <li>Questions ready (Section 4, Step 2)</li>
+</ul>
+
+<div class="footer">
+  <strong>FoundersSuite</strong> — Internal Sales Playbook<br>
+  Confidential. Do not share outside the team.<br>
+  Generated: 26 March 2026
+</div>
+
+</body>
+</html>
