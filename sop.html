@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoundersSuite — Sales SOP</title>
+<style>
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page-break { page-break-before: always; }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a2e; background: #fff; line-height: 1.6; padding: 40px; max-width: 900px; margin: 0 auto; }
+
+  .header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; margin-bottom: 40px; }
+  .header h1 { font-size: 28px; margin-bottom: 4px; }
+  .header p { font-size: 15px; opacity: 0.9; }
+  .header .subtitle { font-size: 13px; opacity: 0.7; margin-top: 8px; }
+
+  h2 { font-size: 20px; color: #667eea; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #667eea; }
+  h3 { font-size: 17px; color: #1a1a2e; margin: 20px 0 10px; }
+
+  .flow-box { background: #f8f9ff; border: 2px solid #667eea; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .flow-title { font-size: 18px; font-weight: 700; color: #667eea; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .flow-step { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+  .flow-step:last-child { margin-bottom: 0; }
+  .step-badge { min-width: 36px; height: 36px; background: #667eea; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; margin-top: 2px; }
+  .step-badge.lead { background: #43a047; }
+  .step-badge.you { background: #667eea; }
+  .step-badge.action { background: #e65100; }
+  .step-content { flex: 1; }
+  .step-who { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+  .step-who.lead { color: #43a047; }
+  .step-who.you { color: #667eea; }
+  .step-who.action { color: #e65100; }
+  .step-desc { font-size: 14px; color: #333; }
+
+  .wa-msg { background: #e7ffdb; border: 1px solid #b5dfaa; border-radius: 12px; padding: 16px; margin: 8px 0; font-size: 13px; line-height: 1.7; white-space: pre-wrap; cursor: pointer; position: relative; }
+  .wa-msg:hover { background: #dcf8c6; }
+  .wa-msg::after { content: "Click to select → Copy"; position: absolute; top: 6px; right: 10px; font-size: 9px; color: #888; font-style: italic; }
+
+  .rule-box { background: #fff3e0; border: 1px solid #ffcc02; border-radius: 8px; padding: 16px; margin: 16px 0; }
+  .rule-box .rule-title { font-weight: 700; color: #e65100; margin-bottom: 8px; font-size: 14px; }
+  .rule-box ul { margin-left: 16px; font-size: 13px; }
+  .rule-box li { margin-bottom: 4px; }
+
+  .do-dont { display: flex; gap: 16px; margin: 16px 0; }
+  .do-box, .dont-box { flex: 1; border-radius: 8px; padding: 16px; }
+  .do-box { background: #e8f5e9; border: 1px solid #a5d6a7; }
+  .dont-box { background: #ffebee; border: 1px solid #ef9a9a; }
+  .do-box h4 { color: #2e7d32; margin-bottom: 8px; }
+  .dont-box h4 { color: #c62828; margin-bottom: 8px; }
+  .do-box li, .dont-box li { font-size: 13px; margin-bottom: 4px; }
+
+  .scenario-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .scenario-table th { background: #667eea; color: white; padding: 10px 12px; text-align: left; }
+  .scenario-table td { padding: 10px 12px; border-bottom: 1px solid #e0e4f5; }
+  .scenario-table tr:nth-child(even) { background: #f8f9ff; }
+
+  .arrow-down { text-align: center; font-size: 24px; color: #667eea; margin: 8px 0; }
+
+  .label-tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .tag-green { background: #e8f5e9; color: #2e7d32; }
+  .tag-orange { background: #fff3e0; color: #e65100; }
+  .tag-red { background: #ffebee; color: #c62828; }
+  .tag-blue { background: #e3f2fd; color: #1565c0; }
+
+  .footer { text-align: center; margin-top: 40px; padding: 20px; color: #999; font-size: 12px; border-top: 1px solid #eee; }
+
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before { content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px; background: #e0e4f5; }
+  .timeline-item { position: relative; margin-bottom: 20px; }
+  .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #667eea; border: 2px solid white; }
+  .timeline-item.lead::before { background: #43a047; }
+  .timeline-item.dead::before { background: #c62828; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>FoundersSuite — Sales SOP</h1>
+  <p>Lead to Close Workflow for Sales Team</p>
+  <div class="subtitle">Follow this step-by-step. No freelancing. No extra messages.</div>
+</div>
+
+<!-- ==================== THE GOLDEN RULE ==================== -->
+<h2>The Golden Rule</h2>
+<div class="rule-box">
+  <div class="rule-title">Every message you send must push the lead towards ONE thing: booking a call on Cal.com</div>
+  <ul>
+    <li>Never answer detailed questions on WhatsApp — push to call</li>
+    <li>Never send more than 3 messages before they either book a call or get a demo</li>
+    <li>Speed matters — reply within 5 minutes. Fast reply = serious business</li>
+    <li><strong>Cal.com link:</strong> https://app.cal.com/founderssuite/30min</li>
+  </ul>
+</div>
+
+<!-- ==================== MAIN FLOW ==================== -->
+<h2>The Flow — Step by Step</h2>
+
+<!-- STEP 1 -->
+<div class="flow-box">
+  <div class="flow-title">Step 1 — Lead Messages You</div>
+  <div class="flow-step">
+    <div class="step-badge lead">L</div>
+    <div class="step-content">
+      <div class="step-who lead">LEAD SAYS</div>
+      <div class="step-desc">Any message — "Hi", "Interested in ₹50K offer", "Demo", "I want a taxi app", anything.</div>
+    </div>
+  </div>
+  <div class="arrow-down">↓</div>
+  <div class="flow-step">
+    <div class="step-badge action">!</div>
+    <div class="step-content">
+      <div class="step-who action">DECIDE</div>
+      <div class="step-desc">Did they tell you what kind of app they want?</div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2A -->
+<div class="flow-box">
+  <div class="flow-title">Step 2A — They did NOT say what app they want</div>
+  <div class="step-desc" style="margin-bottom:12px; color:#555;">They just said "Hi" / "Interested" / "Details" / "Demo" without specifying the app type.</div>
+  <div class="flow-step">
+    <div class="step-badge you">Y</div>
+    <div class="step-content">
+      <div class="step-who you">YOU SEND — Message 1</div>
+    </div>
+  </div>
+  <div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey! Thanks for reaching out to FoundersSuite 🙌
+Would love to hear about your app idea — let's do a quick chat. Just pick a time that works for you here and we'll connect: https://app.cal.com/founderssuite/30min</div>
+  <div class="arrow-down">↓ Wait for reply</div>
+  <div class="step-desc" style="color:#555;">If they book → Done. If they tell you what app → Go to Step 3. If silent → Go to Step 5.</div>
+</div>
+
+<!-- STEP 2B -->
+<div class="flow-box">
+  <div class="flow-title">Step 2B — They ALREADY said what app they want</div>
+  <div class="step-desc" style="margin-bottom:12px; color:#555;">Their first message says "Taxi app" / "Zomato clone" / "grocery delivery" / "ecommerce" etc.</div>
+  <div class="flow-step">
+    <div class="step-badge you">Y</div>
+    <div class="step-content">
+      <div class="step-who you">YOU SEND — Acknowledge + Demo + Cal.com (ONE message)</div>
+    </div>
+  </div>
+  <div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey! Thanks for reaching out to FoundersSuite 🙌
+
+Here's a demo for you to try 👇
+
+[PASTE MATCHING DEMO FROM DEMO KIT]
+
+Just pick a time that works for you here and we'll connect: https://app.cal.com/founderssuite/30min</div>
+  <div class="arrow-down">↓ Go to Step 4</div>
+</div>
+
+<!-- STEP 3 -->
+<div class="flow-box">
+  <div class="flow-title">Step 3 — They Tell You What App They Want</div>
+  <div class="flow-step">
+    <div class="step-badge lead">L</div>
+    <div class="step-content">
+      <div class="step-who lead">LEAD SAYS</div>
+      <div class="step-desc">"Taxi" / "Food delivery" / "Grocery" / "Ecommerce" / "Like Zomato" / "Like Uber" etc.</div>
+    </div>
+  </div>
+  <div class="arrow-down">↓</div>
+  <div class="flow-step">
+    <div class="step-badge action">!</div>
+    <div class="step-content">
+      <div class="step-who action">PICK THE RIGHT DEMO</div>
+    </div>
+  </div>
+
+  <table class="scenario-table">
+    <thead>
+      <tr><th>They Say</th><th>Send This Demo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Taxi / Ola / Uber / Rapido / cab / auto / bike taxi</td><td>🚗 Taxi Demo (Drivemond)</td></tr>
+      <tr><td>Food / Zomato / Swiggy / restaurant / cloud kitchen</td><td>🍕 Food Demo (StackFood)</td></tr>
+      <tr><td>Grocery / Blinkit / Zepto / my store / local delivery</td><td>🛒 Grocery Single Demo (GroFresh)</td></tr>
+      <tr><td>Grocery marketplace / multiple stores</td><td>🏪 Grocery Multi Demo (eGrocer)</td></tr>
+      <tr><td>Quick commerce / 10-min delivery</td><td>⚡ Quick Commerce Demo (Hexacom)</td></tr>
+      <tr><td>Ecommerce / Amazon / Flipkart / Meesho / products</td><td>🛍️ Ecommerce Demo (6Valley)</td></tr>
+      <tr><td>Something else / unclear</td><td>Don't guess — push to call with Cal.com link</td></tr>
+    </tbody>
+  </table>
+
+  <div class="arrow-down">↓</div>
+  <div class="flow-step">
+    <div class="step-badge you">Y</div>
+    <div class="step-content">
+      <div class="step-who you">YOU SEND — Message 2 (Demo + Cal.com)</div>
+      <div class="step-desc">Go to the Demo Kit, find the matching demo, copy-paste the entire WhatsApp message. It already has the Cal.com link at the bottom.</div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="flow-box">
+  <div class="flow-title">Step 4 — After Sending Demo</div>
+  <div class="step-desc" style="margin-bottom:16px; color:#555;">The lead will do one of these things. Here's how to handle each:</div>
+
+  <table class="scenario-table">
+    <thead>
+      <tr><th>Lead Does</th><th>You Do</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="label-tag tag-green">BEST CASE</span><br>Books a slot on Cal.com</td>
+        <td>Done. Prep for the call. Nothing else needed.</td>
+      </tr>
+      <tr>
+        <td><span class="label-tag tag-green">GOOD</span><br>Says "Yes" / "Ok" / "Let's do it"</td>
+        <td>Send: <em>"Great! Here's the link to book the call: https://app.cal.com/founderssuite/30min"</em></td>
+      </tr>
+      <tr>
+        <td><span class="label-tag tag-blue">GOOD</span><br>Says "free now" / "call me"</td>
+        <td><strong>CALL THEM IMMEDIATELY.</strong> Don't type, just call.</td>
+      </tr>
+      <tr>
+        <td><span class="label-tag tag-orange">OKAY</span><br>Asks a question about features/price/timeline</td>
+        <td>Send: <em>"Great question — let's cover that properly on a quick call so I can give you the right answer: https://app.cal.com/founderssuite/30min"</em></td>
+      </tr>
+      <tr>
+        <td><span class="label-tag tag-orange">OKAY</span><br>Asks "how to test the demo"</td>
+        <td>Send the testing instructions message from the Demo Kit (copy-paste). It has Cal.com link at the end.</td>
+      </tr>
+      <tr>
+        <td><span class="label-tag tag-red">COLD</span><br>No reply</td>
+        <td>Go to Step 5 (Follow-ups)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- STEP 5 -->
+<div class="flow-box">
+  <div class="flow-title">Step 5 — Follow-ups (If Lead Goes Silent)</div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3>After 24 hours — Nudge 1</h3>
+      <div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey! Just following up — are you still looking to build this? Happy to do a quick 10-min call to walk you through everything: https://app.cal.com/founderssuite/30min</div>
+    </div>
+
+    <div class="timeline-item">
+      <h3>After 48 hours — Nudge 2</h3>
+      <div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey! We have a couple of project slots opening up this week. Want me to reserve one for you? Pick a time here: https://app.cal.com/founderssuite/30min</div>
+    </div>
+
+    <div class="timeline-item dead">
+      <h3>After 72 hours — Dead Lead</h3>
+      <div class="step-desc" style="color:#c62828; font-weight:600;">Stop messaging. Move on. Don't waste more time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DOs AND DON'Ts ==================== -->
+<div class="page-break"></div>
+<h2>Do's and Don'ts</h2>
+
+<div class="do-dont">
+  <div class="do-box">
+    <h4>✅ DO</h4>
+    <ul>
+      <li>Reply within 5 minutes</li>
+      <li>Send Cal.com link in EVERY message</li>
+      <li>Copy-paste from Demo Kit (don't type manually)</li>
+      <li>Call immediately if they say "free now"</li>
+      <li>Keep messages short</li>
+      <li>Send demo as soon as you know their category</li>
+      <li>Push every question to the call</li>
+    </ul>
+  </div>
+  <div class="dont-box">
+    <h4>❌ DON'T</h4>
+    <ul>
+      <li>Don't ask multiple qualifying questions on WhatsApp</li>
+      <li>Don't answer feature/pricing questions on text</li>
+      <li>Don't send more than 3 messages before demo or call</li>
+      <li>Don't wait hours to reply</li>
+      <li>Don't type custom messages (use templates)</li>
+      <li>Don't chase after 72 hours</li>
+      <li>Don't send demo for wrong category (check the table)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== ON THE CALL ==================== -->
+<div class="page-break"></div>
+<h2>On The Call — 15 Minute Script</h2>
+
+<div class="flow-box">
+  <div class="flow-title">First 5 Minutes — YOU ASK, THEY TALK</div>
+  <div class="step-desc" style="margin-bottom:12px;">Ask these questions in order. Let them talk. Take notes.</div>
+  <table class="scenario-table">
+    <thead><tr><th>#</th><th>Question</th><th>Why You're Asking</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>"So tell me — what's the app you're thinking of?"</td><td>Let them describe in their own words</td></tr>
+      <tr><td>2</td><td>"Is this for your own business or a marketplace where others also list?"</td><td>Single vs multi-vendor = different demo</td></tr>
+      <tr><td>3</td><td>"How are you handling this today without the app?"</td><td>Reveals their pain point</td></tr>
+      <tr><td>4</td><td>"How many drivers/vendors/stores do you have right now?"</td><td>Shows if they're ready to launch</td></tr>
+      <tr><td>5</td><td>"What's the biggest pain point for you today?"</td><td>This is what you'll solve in V1</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="flow-box">
+  <div class="flow-title">Next 5 Minutes — SHOW DEMO</div>
+  <div class="step-desc" style="margin-bottom:12px;">Screen share the matching admin panel. Walk them through it.</div>
+  <table class="scenario-table">
+    <thead><tr><th>Say This</th></tr></thead>
+    <tbody>
+      <tr><td>"Let me show you something — this is similar to what we'd build for you."</td></tr>
+      <tr><td>→ Open the matching admin panel on screen share</td></tr>
+      <tr><td>→ Walk through: "This is your dashboard... here's how you'd manage [drivers/orders/vendors]..."</td></tr>
+      <tr><td>→ "For your use case, we'd customize [X, Y, Z based on what they told you in first 5 min]"</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="flow-box">
+  <div class="flow-title">Last 5 Minutes — CLOSE</div>
+  <table class="scenario-table">
+    <thead><tr><th>Say This</th></tr></thead>
+    <tbody>
+      <tr><td>"Here's what I suggest — we start with Phase 1, your MVP."</td></tr>
+      <tr><td>"Core flow working end-to-end — User App + [Driver/Vendor] App + Admin Panel."</td></tr>
+      <tr><td>"You launch, get your first [drivers/vendors/users] onboarded, validate the model."</td></tr>
+      <tr><td>"₹50,000. Delivered in 14-20 days."</td></tr>
+      <tr><td>"Should I send you the project kickoff details?"</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:16px;">
+    <table class="scenario-table">
+      <thead><tr><th>They Say</th><th>You Say</th></tr></thead>
+      <tbody>
+        <tr><td><span class="label-tag tag-green">YES</span></td><td>"Great! I'll send you the invoice. We need 50% advance (₹25,000) to kick off. I'll share payment details on WhatsApp."</td></tr>
+        <tr><td><span class="label-tag tag-orange">LET ME THINK</span></td><td>"Totally understand. I'll send you a summary on WhatsApp. Just so you know, we take limited projects each month. Let me know by [2 days from now] and I'll reserve your slot."</td></tr>
+        <tr><td><span class="label-tag tag-red">TOO EXPENSIVE</span></td><td>"This is our MVP price — just the core. No extras, no fluff. It's the foundation you need to launch. Once you start earning from it, Phase 2 is where we add [feature they wanted]."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== AFTER THE CALL ==================== -->
+<div class="page-break"></div>
+<h2>After The Call</h2>
+
+<div class="flow-box">
+  <div class="flow-title">Send Within 10 Minutes on WhatsApp</div>
+  <div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey [Name]! Great chatting with you 🙌
+
+Quick summary:
+- *App:* [Taxi/Food/Grocery/Ecommerce] — [single/multi vendor]
+- *Phase 1 MVP:* User App + [Driver/Vendor] App + Admin Panel
+- *Investment:* ₹50,000
+- *Timeline:* 14-20 days
+- *What you get:* Fully functional app ready to launch
+
+To kick off, we just need a 50% advance (₹25,000). I'll share the payment details whenever you're ready!</div>
+</div>
+
+<div class="flow-box">
+  <div class="flow-title">Post-Call Follow-ups</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3>After 24 hours</h3>
+      <div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey [Name]! Did you get a chance to think about the project? Happy to answer any questions.</div>
+    </div>
+    <div class="timeline-item">
+      <h3>After 48 hours</h3>
+      <div class="wa-msg" onclick="window.getSelection().selectAllChildren(this)">Hey [Name] — just checking in. We have 2 project slots opening up this week. Want me to reserve one for you?</div>
+    </div>
+    <div class="timeline-item dead">
+      <h3>After 72 hours — Move on</h3>
+      <div class="step-desc" style="color:#c62828; font-weight:600;">Stop following up. Focus on new leads.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== QUICK REFERENCE ==================== -->
+<div class="page-break"></div>
+<h2>Quick Reference Card</h2>
+
+<div class="rule-box" style="background:#e3f2fd; border-color:#667eea;">
+  <div class="rule-title" style="color:#667eea;">The Entire Flow in 30 Seconds</div>
+  <ul style="font-size:14px; line-height:2;">
+    <li><strong>Lead messages</strong> → Send Cal.com link</li>
+    <li><strong>They tell you what app</strong> → Send matching demo + Cal.com link</li>
+    <li><strong>They engage</strong> → Send testing instructions + Cal.com link</li>
+    <li><strong>They book call</strong> → Ask questions → Show demo → Close at ₹50K</li>
+    <li><strong>After call</strong> → Send summary → Follow up 24/48hrs → Move on at 72hrs</li>
+  </ul>
+</div>
+
+<div class="rule-box">
+  <div class="rule-title">Key Numbers</div>
+  <ul style="font-size:14px;">
+    <li><strong>Reply speed:</strong> Under 5 minutes</li>
+    <li><strong>Max messages before call:</strong> 3</li>
+    <li><strong>Call duration:</strong> 15 minutes</li>
+    <li><strong>V1 price:</strong> ₹50,000 (never go below this)</li>
+    <li><strong>V1 timeline:</strong> 14-20 days</li>
+    <li><strong>Advance:</strong> 50% (₹25,000)</li>
+    <li><strong>Follow-up limit:</strong> 72 hours then move on</li>
+    <li><strong>Cal.com link:</strong> https://app.cal.com/founderssuite/30min</li>
+  </ul>
+</div>
+
+<div class="rule-box" style="background:#e8f5e9; border-color:#a5d6a7;">
+  <div class="rule-title" style="color:#2e7d32;">Where To Find Everything</div>
+  <ul style="font-size:14px;">
+    <li><strong>Demo Kit (all links + copy-paste messages):</strong> <a href="https://founderssuiteservices-tech.github.io/founderssuite-demo-kit/">founderssuiteservices-tech.github.io/founderssuite-demo-kit</a></li>
+    <li><strong>Cal.com booking page:</strong> <a href="https://app.cal.com/founderssuite/30min">app.cal.com/founderssuite/30min</a></li>
+    <li><strong>Admin panel credentials (all demos):</strong> admin@admin.com / 12345678</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <strong>FoundersSuite</strong> — Sales SOP v1.0<br>
+  For internal team use only.<br>
+  Generated: 26 March 2026
+</div>
+
+</body>
+</html>
